@@ -4,8 +4,8 @@ Formation Python orienté objet
 * **Classe:**
 > C'est la recette du gateau  
   C'est la voiture  
-**Objet**
+* **Objet**
 > C'est le gateau
     C'est ma voiture Zoé
-**Methode**
-> 
+* **Methode**
+> Pour l'instant c'est rien
