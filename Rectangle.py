@@ -6,6 +6,8 @@ class rectangle:
 
     def calculate_area(self):
         return self.largeur * self.longueur
+    def calculate_diagonale(self):
+        return self.largeur * self.longueur
 
     
 
