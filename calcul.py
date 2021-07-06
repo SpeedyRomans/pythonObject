@@ -1,9 +1,12 @@
 #Programme pour utiliser la classe Rectangle
-from pythonObject.Rectangle import rectangle
+from Rectangle import Rectangle
 
-
-long=rectangle.longueur
+r = Rectangle()
+long=r.longueur
 print(long)
+area=r.calculate_area()
+print(area)
+
 
 
 
