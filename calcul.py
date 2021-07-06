@@ -5,7 +5,7 @@ r = Rectangle()
 long=r.longueur
 print(long)
 area=r.calculate_area()
-print(area)
+print("La surface est de ",area)
 
 
 
