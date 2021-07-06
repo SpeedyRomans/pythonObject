@@ -2,10 +2,11 @@
 Formation Python orienté objet
 ## Vocabulaire
 * **Classe:**
-> C'est la recette du gateau  
+> C'est la recette du gateau    
   C'est la voiture  
 * **Objet**
-> C'est le gateau
-    C'est ma voiture Zoé
+> C'est le gateau  
+  C'est ma voiture Zoé
 * **Methode**
-> Pour l'instant c'est rien
+> C'est ce que fait l'objet 
+
