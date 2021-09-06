@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import os
 from tkinter import filedialog
 
@@ -13,7 +12,8 @@ exclude		= ['Thumbs.db','.tmp']	# exclude files containing these strings
 # Choix du dossier source
 folder = filedialog.askdirectory()
 # Nom du fichier
-outputfile	=filedialog.askopenfilename()
+outputfile	=filedialog.asksaveasfilename()
+print(folder)
 print(outputfile)
 
 # Création ou ouverture du fichier 
