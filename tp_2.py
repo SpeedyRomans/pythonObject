@@ -1,5 +1,5 @@
+# afficher un nombre d'etoile voulu
 numeroLigne = 1
-nombreLigne = 7
 nombreLigne = int(input('Rentrez un chiffre'))
 while numeroLigne<= nombreLigne :
     print (numeroLigne*'*')
