@@ -4,33 +4,50 @@ from tkinter import filedialog
 
 # start editable vars #
 pathsep		= chr(92)			# path seperator ('/' for linux, '\' or chr(92) for Windows)
-# outputfile	= "L://FAUN//BE//2.Logiciel//FCS//Projets//FNCOM//Family V03//APPL_CM_V03_01_02_xxxx//inventory.txt" # file to save the results to
-# folder = "L://FAUN//BE//2.Logiciel//FCS//Projets//FNCOM//Family V03//APPL_CM_V03_01_02_xxxx//SourceCode//"
 exclude		= ['Thumbs.db','.tmp']	# exclude files containing these strings
-# end editable vars #
+
+# Cette fonction recherche une ligne avec une chaine de caractère dans un fichier
+def SearchLineWithString(fileToSearch,stringToFind):
+	with open(fileToSearch, "r") as file:
+		# Initialisation de la variable de retour
+		lineFound = ""
+		for line in file:
+			# Insérer içi le code de recherche de chaine de caractère
+			if line.find(stringToFind) != -1:
+				lineFound = line.removeprefix(stringToFind)
+				break
+		file.close()
+	return lineFound
+
+def lineToPath(line):
+	# Mise en forme de la ligne
+	pathFound = line.replace("'","")
+	pathFound = pathFound.replace(":= ","")
+	pathFound = pathFound.replace(" *)","")
+	pathFound = pathFound.replace(" ","")
+	pathFound = pathFound.strip()
+	return pathFound
+
 
 # Choix du dossier source
 folder = filedialog.askdirectory()
-# Nom du fichier
-outputfile	=filedialog.asksaveasfilename()
-print(folder)
-print(outputfile)
 
-# Création ou ouverture du fichier 
-with open(outputfile, "w") as txtfile:
-	dirList = os.walk(folder)
-	print(dirList)
-	for path,dirs,files in os.walk(folder):
-		#sep = ("\n---------- " + path.split(pathsep)[len(path.split(pathsep))-1] + " ----------")
-		#print (sep)
-		#txtfile.write("%s\n" % sep)
+# Parcour du dossier 
+for path,dirs,files in os.walk(folder):
+	for fn in sorted(files):
+		if not any(x in fn for x in exclude):
+			# Nom du fichier trouvé
+			originFileName = (folder+"/"+fn)
 
-		for fn in sorted(files):
-			if not any(x in fn for x in exclude):
-				filename = os.path.splitext(fn)[0]
-				extens = os.path.splitext(fn)[1]
-				fileFullName = (filename+ extens)
-				print (fileFullName)
-				txtfile.write("%s\n" % fileFullName )
+			#Recherhe son arboresence dans le fichier trouvé
+			line = SearchLineWithString(originFileName,"(* @PATH")
+			pathFound = lineToPath(line)
 
-txtfile.close()
+			# non de la destination du fichier trouvé
+			repertory = folder+pathFound
+			destFileName= repertory+"/"+fn
+
+			# Creation de l'arborescence et transfert du fichier
+			#print(destFileName)
+			os.makedirs(repertory, exist_ok=True)
+			os.replace(originFileName,destFileName)
